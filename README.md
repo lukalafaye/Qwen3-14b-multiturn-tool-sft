@@ -1,1 +1,3 @@
 # Qwen3-14b-multiturn-tool-sft
+
+I fine-tuned Qwen3-14B to perform multi-turn tool calling on ToolBench traces, then built an evaluation framework that slices conversations into tool-call steps and scores predictions with set/multiset equality, Jaccard, and PR/F1. Next, I created an adversarial variant of the data by injecting prompts into the last <tool_response> and trained a second LoRA to detect and refuse these attacks by emitting a guarded Finish (“Detected prompt injection, stopping now.”). This reduced attack success from ~62% to ~27% on the validation set while largely retaining multi-turn tool behavior (about 58% of failed attacks were explicitly refused). Both LoRAs and scripts for data prep, evaluation, and plots are included.
